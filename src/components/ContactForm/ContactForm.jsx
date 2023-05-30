@@ -33,7 +33,7 @@ const ContactForm = () => {
     const { value } = evt.currentTarget;
 
     const isExists = contacts.find(
-      (contact) => contact.number === value
+      (contact) => contact.phone === value
     );
 
     if (isExists) {
