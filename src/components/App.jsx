@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
 import './App.css';
 import  { Toaster } from 'react-hot-toast';
+import { fetchContacts } from '../redux/operations';
 
 
 export default function App() {
-
+  
   return (
     <>
       <Toaster />
@@ -17,9 +18,10 @@ export default function App() {
           <ContactForm />
         </section>
         <section title="Contacts" className="Section">
-          <h2>Contacts</h2>
+          <h2>Filter</h2>
           <Filter />
-          {/* <ContactList /> */}
+          <h2>Contacts</h2>
+          <ContactList />
         </section>
 
       </div>
