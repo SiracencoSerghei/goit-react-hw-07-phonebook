@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
-import { getContactsItems, addContact } from '../../redux/contacts/contactSlice';
+import { addContact } from '../../redux/operations';
 import { showInfoMessage, showSuccessMessage } from '../../utils/notifications';
+import { useFetchContacts } from '../../utils/hooks';
+import { selectContacts } from '../../redux/selectors';
 import './ContactForm.css';
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContactsItems);
+  const contacts = useSelector(selectContacts);
   console.log('contacts', contacts);
   const dispatch = useDispatch();
 
@@ -51,9 +52,8 @@ const ContactForm = ({ onAddContact }) => {
   const onContactFormSubmit = evt => {
     evt.preventDefault();
     const contact = {
-        id: nanoid(),
         name: evt.target.name.value,
-        number: evt.target.number.value,
+        phone: evt.target.number.value,
       };
 console.log('contact', contact);
     
@@ -61,6 +61,7 @@ console.log('contact', contact);
     showSuccessMessage('New contact has been added in your phonebook');
     formReset();
   };
+  useFetchContacts(dispatch);
 
   return (
     <div className="formWrapper">
